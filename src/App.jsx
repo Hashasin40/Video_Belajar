@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import RequireAuth from "./component/RequireAuth";
 
 // ✅ Lazy load pages
 const SignUp = React.lazy(() => import("./pages/SignUp"));
@@ -46,6 +47,15 @@ function App() {
           {/* Public Routes */}
           <Route path="/" element={<DashboardLayout />}>
             <Route index element={<Dashboard />} />
+          </Route>
+          
+          {/* Protected Routes */}
+          <Route path="/category" element={
+          <RequireAuth>
+            <DashboardLayout /> {/* ✅ dilindungi RequireAuth */}
+          </RequireAuth>
+        }>
+            <Route index element={<Category />} />
           </Route>
           <Route element={<AuthLayout />}>
             <Route path="/signin" element={<SignIn />} />

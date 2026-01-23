@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import VideoBelajar from "../../assets/VideoBelajar.png";
 
-const NavbarAuth = () => {
+const NavbarImage = () => {
   return (
-    <nav className="box-border border-b-2 border-gray-200 flex items-center justify-between px-2 py-2">
+    <nav className=" flex items-center justify-between">
       
       <Link to="/" className="inline-block">
         <img
@@ -14,9 +14,8 @@ const NavbarAuth = () => {
         />
       </Link>
       
-      {/* Tambahkan menu atau tombol di sini kalau perlu */}
     </nav>
   );
 };
 
-export default NavbarAuth;
+export default NavbarImage;

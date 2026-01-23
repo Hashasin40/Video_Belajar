@@ -1,45 +1,5 @@
-import { useSignUp } from "../hooks/useSignup";
-import React, { useState } from "react";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from "../../lib/firebase"; // ✅ tambahkan ini
-import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
-import PasswordInput from "../component/PasswordInput";
-import PhoneInput from "../component/PhoneInput";
-import ButtonSubmit from "../component/button/ButtonSubmit";
-import ButtonLink from "../component/button/ButtonLink";
-import GoogleIcon from "../assets/icon_google.png";
-
-function SignUp() {
-  const [nama, setNama] = useState("");
-  const [telp, setTelp] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
-
-  const {handleSubmit } = useSignUp();
-
-    const handleGoogleLogin = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      toast.success(`Selamat datang, ${user.displayName}!`);
-      window.location.href = "/";
-    } catch (error) {
-      console.error("Error Google Login:", error);
-      toast.error(error.message);
-    }
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    handleSubmit({ nama, telp: phone, email, password });
-  };
-
-  return (
     // Form Sign Up
-    <form onSubmit={onSubmit} className="max-w-md mx-auto mt-10 space-y-4 border p-6 rounded-lg shadow-lg">
+    <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-10 space-y-4 border p-6 rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold text-center">Pendaftaran Akun</h2>
       <span className="text-center text-sm flex  text-gray-500 justify-content-center mb-4">Yuk, daftarkan akunmu sekarang juga!</span>
       
@@ -61,9 +21,6 @@ function SignUp() {
         <PhoneInput
           value={phone}
           onChange={setPhone}
-          required
-          onInvalid={(e) => e.target.setCustomValidity("Nomor telepon wajib diisi")}
-          onInput={(e) => e.target.setCustomValidity("")}
         />
 
       <div className="space-y-3 flex flex-col mb-3">
@@ -150,8 +107,5 @@ function SignUp() {
         />
         <span className="text-blue-600 group-hover:text-white"  >Login with Google</span>
       </button>
-    </form>
-  );
-}
 
-export default SignUp;
+    </form>
