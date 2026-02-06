@@ -1,9 +1,45 @@
 import React from "react";
-function ContentSemua() {
-    return (
-        <>
-            <h1>Ini adalah halaman Semua</h1>
-        </>
-    );
+import ButtonView from "../../button/ButtonView";
+
+function ContentSemua({ data }) {
+  if (!data || data.length === 0) {
+    return <p className="text-center">Belum ada data</p>;
+  }
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      {data.map(item => (
+        <div
+        className="group relative bg-white rounded-xl p-4 flex flex-col
+        shadow transition-all duration-500 hover:-translate-y-3"
+      >
+        <span
+          className="pointer-events-none absolute inset-0 rounded-xl
+          border-2 border-transparent
+          group-hover:border-emerald-500
+          transition-all duration-500"
+        />
+          <img
+            src={item.thumbnail}
+            alt={item.title}
+            className="rounded-lg mb-3"
+          />
+          <h5 className="font-semibold line-clamp-2">{item.title}</h5>
+          <p className="line-clamp-3 text-gray-500" >{item.description}</p>
+          <div className="mt-2 flex flex-row justify-between items-center">
+            <div className="mt-4 flex flex-row ">
+                <p className="text-sm">
+                    <span className="text-gray-500">⭐ {item.rating ?? "N/A"} • </span>
+                    <span className="font-semibold text-green-600">{item.price 
+                    ? `Rp ${item.price.toLocaleString()}` : "Harga belum tersedia"}</span>
+                </p>
+            </div>
+            <ButtonView/>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
+
 export default ContentSemua;

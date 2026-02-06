@@ -1,22 +1,44 @@
 import React from "react";
+import ButtonView from "../../button/ButtonView";
 
-function ContentBisnis() {
-    return (
-        <>
-        <div>
-            <div className=" text-white p-4 mx-5 rounded-lg my-5 text-center"
-                style={{
-                    backgroundColor: '#1E3A8A',
-            }}>
-                <div className="max-w-3xl mx-auto my-4">
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight break-words font-sans">
-                        Tingkatkan Keterampilan Bisnis Anda dengan Video Pembelajaran Interaktif!
-                    </h1>
-                    <small className="">Pelajari strategi bisnis terbaru, manajemen keuangan, pemasaran digital, dan banyak lagi melalui video pembelajaran interaktif kami yang dirancang khusus untuk para profesional bisnis.</small>
-                </div>
+function ContentBisnis({ data }) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      {data.map(course => (
+        <div
+        className="group relative bg-white rounded-xl p-4 flex flex-col
+        shadow transition-all duration-500 hover:-translate-y-3"
+      >
+        <span
+          className="pointer-events-none absolute inset-0 rounded-xl
+          border-2 border-transparent
+          group-hover:border-emerald-500
+          transition-all duration-500"
+        />
+
+          <img
+            src={course.thumbnail}
+            alt={course.title}
+            className="rounded-lg mb-3"
+          />
+          <h5 className="font-semibold text-shadow-lg/10">{course.title}</h5>
+          <p className="line-clamp-3 text-gray-500">{course.description}</p>
+          <div className="mt-2 flex flex-row justify-between items-center">
+            <div className="mt-4 flex flex-row">
+              <p className="text-sm">
+                <span className="text-gray-500">⭐ {course.rating ?? "N/A"} •{" "}</span>
+                <span className="font-semibold text-green-600">{course.price
+                  ? `Rp ${course.price.toLocaleString()}`
+                  : "Harga belum tersedia"}
+                </span>
+              </p>
             </div>
+            <ButtonView/>
+          </div>
         </div>
-        </>
-    );
+      ))}
+    </div>
+  );
 }
+
 export default ContentBisnis;
