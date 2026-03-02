@@ -124,6 +124,7 @@
 .footer-social-link.instagram:hover {
   background-color: #e4405f;
   color: #ffffff;
+  box-shadow: 0 0 12px #e4405f;
 }
 
 .footer-social-link.twitter:hover {
@@ -134,6 +135,13 @@
 .footer-social-link.github:hover {
   background-color: #333333;
   color: #ffffff;
+  box-shadow: 0 0 12px #333333;
+}
+
+.footer-social-link.tiktok:hover {
+  background-color: #000000;
+  color: #25F4EE;
+  box-shadow: 0 0 12px #25F4EE;
 }
 
 /* Footer Bottom */
